@@ -1,0 +1,62 @@
+spring:
+  elasticsearch:
+    bboss:
+      elasticPassword: changeme
+      elasticUser: elastic
+      elasticsearch:
+        dateFormat: yyyy.MM.dd
+        discoverHost: false
+        rest:
+          hostNames: 192.168.137.1:9200
+        scrollBlockedWaitTimeout: 0
+        scrollThreadCount: 200
+        scrollThreadQueue: 200
+        showTemplate: true
+        sliceScrollBlockedWaitTimeout: 0
+        sliceScrollThreadCount: 100
+        sliceScrollThreadQueue: 100
+      http:
+        connectionRequestTimeout: 50000
+        customHttpRequestRetryHandler: org.frameworkset.spi.remote.http.ConnectionResetHttpRequestRetryHandler
+        defaultMaxPerRoute: 200
+        hostnameVerifier:
+        keepAlive: 3600000
+        keyPassword:
+        keystore:
+        maxHeaderCount: 200
+        maxLineLength: -1
+        maxTotal: 400
+        retryTime: 1
+        retryInterval: 1000
+        soKeepAlive: false
+        soReuseAddress: false
+        staleConnectionCheckEnabled: false
+        timeToLive: 3600000
+        timeoutConnection: 50000
+        timeoutSocket: 50000
+        validateAfterInactivity: 50000
+        kerberos:
+          principal: elastic/admin@BBOSSGROUPS.COM
+          keytab: C:/environment/es/8.13.2/elasticsearch-8.13.2/config/elastic.keytab
+          krb5Location: C:/environment/es/8.13.2/elasticsearch-8.13.2/config/krb5.conf
+          useTicketCache: false
+          refreshKrb5Config: true
+          storeKey: true
+          doNotPrompt: true
+          isInitiator: true
+          debug: false
+      db:
+        driver: com.mysql.jdbc.Driver
+        name: test
+        password: 123456
+        url: jdbc:mysql://localhost:3306/bboss
+        usePool: false
+        user: root
+        validateSQL: select 1
+      dslfile:
+        refreshInterval: -1
+        ##dslMappingDir: D:/workdir/es
+      propertiesInterceptor: org.bboss.elasticsearchtest.springboot.TestPropertiesInterceptor
+  # 添加 log4j2 配置
+  logging:
+    config: classpath:log4j2.yaml   
