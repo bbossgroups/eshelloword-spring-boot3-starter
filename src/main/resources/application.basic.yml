@@ -1,7 +1,8 @@
 spring:
   elasticsearch:
     bboss:
- 
+      elasticPassword: changeme
+      elasticUser: elastic
       elasticsearch:
         dateFormat: yyyy.MM.dd
         discoverHost: false
@@ -34,16 +35,6 @@ spring:
         timeoutConnection: 50000
         timeoutSocket: 50000
         validateAfterInactivity: 50000
-        kerberos:
-          principal: elastic/admin@BBOSSGROUPS.COM
-          keytab: C:/environment/es/8.13.2/elasticsearch-8.13.2/config/elastic.keytab
-          krb5Location: C:/environment/es/8.13.2/elasticsearch-8.13.2/config/krb5.conf
-          useTicketCache: false
-          refreshKrb5Config: true
-          storeKey: true
-          doNotPrompt: true
-          isInitiator: true
-          debug: false
       db:
         driver: com.mysql.jdbc.Driver
         name: test
