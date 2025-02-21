@@ -21,13 +21,13 @@ spring:
         http:
           connectionRequestTimeout: 50000
           customHttpRequestRetryHandler: org.frameworkset.spi.remote.http.ConnectionResetHttpRequestRetryHandler
-          defaultMaxPerRoute: 200
+          defaultMaxPerRoute: 100
           hostnameVerifier: ''
           keyPassword: ''
           keystore: ''
           maxHeaderCount: 200
           maxLineLength: -1
-          maxTotal: 400
+          maxTotal: 100
           retryTime: 1
           retryInterval: 10000
           staleConnectionCheckEnabled: false
@@ -44,7 +44,7 @@ spring:
           dateFormat: yyyy.MM.dd
           discoverHost: false
           rest:
-            hostNames: localhost:9200
+            hostNames: 192.168.137.1:9200
           scrollBlockedWaitTimeout: 0
           scrollThreadCount: 200
           scrollThreadQueue: 200
