@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.bbossgroups.plugins</groupId>
             <artifactId>bboss-elasticsearch-spring-boot3-starter</artifactId>
-            <version>7.3.7</version>
+            <version>7.3.8</version>
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <artifactId>slf4j-log4j12</artifactId>-->
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.bbossgroups.plugins</groupId>
             <artifactId>bboss-datatran-jdbc</artifactId>
-            <version>7.3.7</version>
+            <version>7.3.8</version>
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <artifactId>slf4j-log4j12</artifactId>-->
@@ -88,7 +88,7 @@
                     <groupId>org.apache.logging.log4j</groupId>
                 </exclusion>
             </exclusions>
-            <version>3.2.4</version>
+            <version>3.4.3</version>
         </dependency>
 
         <dependency>
@@ -102,7 +102,7 @@
                
                 
             </exclusions>
-            <version>3.2.4</version>
+            <version>3.4.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,7 +114,7 @@
                 </exclusion>
               
             </exclusions>
-            <version>3.2.4</version>
+            <version>3.4.3</version>
         </dependency>
 <!--
         <dependency>
@@ -134,7 +134,7 @@
                     <artifactId>jul-to-slf4j</artifactId>
                 </exclusion>
             </exclusions>
-            <version>3.2.4</version>
+            <version>3.4.3</version>
         </dependency>
        -->
         <dependency>
