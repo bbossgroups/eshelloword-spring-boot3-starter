@@ -1,0 +1,24 @@
+spring:
+  elasticsearch:
+    bboss:
+      elasticPassword: changeme
+      elasticUser: elastic
+      elasticsearch:
+        dateFormat: yyyy.MM.dd
+        discoverHost: false
+        rest:
+          hostNames: https://192.168.137.1:9200
+        scrollBlockedWaitTimeout: 0
+        scrollThreadCount: 200
+        scrollThreadQueue: 200
+        showTemplate: true
+        sliceScrollBlockedWaitTimeout: 0
+        sliceScrollThreadCount: 100
+        sliceScrollThreadQueue: 100
+      http:     
+        defaultMaxPerRoute: 200    
+        maxTotal: 400
+      dslfile:
+        refreshInterval: -1
+     
+ 
