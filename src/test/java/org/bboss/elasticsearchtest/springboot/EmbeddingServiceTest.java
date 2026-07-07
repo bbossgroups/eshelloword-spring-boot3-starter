@@ -16,7 +16,7 @@ package org.bboss.elasticsearchtest.springboot;
  */
 
 import org.bboss.elasticsearchtest.springboot.bulk.TestBulkProcessor7x;
-import org.frameworkset.elasticsearch.boot.BBossESStarter;
+import org.bboss.elasticsearchtest.springboot.embedding.EmbeddingService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,8 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
 
@@ -39,29 +37,19 @@ import static java.lang.Thread.sleep;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BulkProcessor7Test {
-	private Logger logger = LoggerFactory.getLogger(BulkProcessor7Test.class);
+public class EmbeddingServiceTest {
+	private Logger logger = LoggerFactory.getLogger(EmbeddingServiceTest.class);
  
 	@Autowired
-	private TestBulkProcessor7x testBulkProcessor7x;
+	private EmbeddingService embeddingService;
 	@Test
-	public void testBulkProcessor7x(){
-
-		testBulkProcessor7x.buildBulkProcessor();
-		int count = 0;
-		do {
-
-			testBulkProcessor7x.testBulkDatas();
-			count++;
-			if(count == 2)
-				break;
-			try {
-				sleep(100l);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}while(true);
+	public void testEmbeddingService(){
 		
-		testBulkProcessor7x.shutdown(false);
+		embeddingService.createEmbeddingIndice();
+		
+		embeddingService.addEmbeddingDocuments();
+		
+		embeddingService.embeddingDocumentsSearch();
+		 
 	}
 }

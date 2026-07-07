@@ -15,24 +15,18 @@
             <groupId>com.bbossgroups.plugins</groupId>
             <artifactId>bboss-elasticsearch-spring-boot3-starter</artifactId>
             <version>7.5.6</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>slf4j-log4j12</artifactId>-->
-<!--                    <groupId>org.slf4j</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+
         </dependency>
         <dependency>
             <groupId>com.bbossgroups.plugins</groupId>
             <artifactId>bboss-datatran-jdbc</artifactId>
             <version>7.5.6</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>slf4j-log4j12</artifactId>-->
-<!--                    <groupId>org.slf4j</groupId>-->
-<!--                </exclusion>-->
-<!--                -->
-<!--            </exclusions>-->
+
+        </dependency>
+        <dependency>
+            <groupId>com.bbossgroups</groupId>
+            <artifactId>bboss-ai-flow</artifactId>
+            <version>6.5.5</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
@@ -88,7 +82,24 @@
                     <groupId>org.apache.logging.log4j</groupId>
                 </exclusion>
             </exclusions>
-            <version>3.4.3</version>
+            <version>3.5.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+             
+            <exclusions>
+                <exclusion>
+                    <artifactId>logback-classic</artifactId>
+                    <groupId>ch.qos.logback</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
+            <version>3.5.16</version>
         </dependency>
 
         <dependency>
@@ -102,7 +113,7 @@
                
                 
             </exclusions>
-            <version>3.4.3</version>
+            <version>3.5.16</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,7 +125,7 @@
                 </exclusion>
               
             </exclusions>
-            <version>3.4.3</version>
+            <version>3.5.16</version>
         </dependency>
 <!--
         <dependency>

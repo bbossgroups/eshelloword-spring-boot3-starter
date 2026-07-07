@@ -1,0 +1,69 @@
+<properties>
+    <!--
+        For EasySearch
+        创建向量索引表结构
+    -->
+    <property name="createEmbeddingIndice">
+        <![CDATA[{
+            "settings": {
+                "number_of_shards": 6,
+                "index.refresh_interval": "5s"
+            },
+            
+            "mappings": {
+                "properties": {
+                  "title": { "type": "text" },
+                  "embedding": {
+                    "type": "knn_dense_float_vector",
+                    "knn": {
+                      "dims": 1024,
+                      "model": "lsh",
+                      "similarity": "cosine",
+                      "L": 99,
+                      "k": 1
+                    }
+                  }
+                }
+            }
+        }]]>
+    </property>
+
+    <!--
+     For EasySearch
+     向量检索查询
+ -->
+    <property name="embeddingDocumentsSearch">
+        <![CDATA[ 
+        {
+          "size": #[size],
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "knn_nearest_neighbors": {
+                    "field": "embedding",
+                    "vec": { "values": #[content,serialJson=true] },
+                    "model": "lsh",
+                    "similarity": "cosine",
+                    "candidates": 100
+                  }
+                }
+              ],
+              "should": [
+                {
+                  "match": {
+                    "title": {
+                      "query": #[title],
+                      "boost": 2.0
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+]]>
+    </property>
+ 
+    
+</properties>  
