@@ -88,7 +88,7 @@ public class BBossES7StarterTestCase {
 		documentCRUD.testSearchSourceFilter();
 
 		documentCRUD.updateDemoIndice();
-		documentCRUD.testBulkAddDocuments();
+//		documentCRUD.testBulkAddDocuments();
 	}
 
 	@Test

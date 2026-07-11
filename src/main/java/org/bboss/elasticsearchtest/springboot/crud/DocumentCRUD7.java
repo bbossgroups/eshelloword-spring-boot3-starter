@@ -330,6 +330,9 @@ public class DocumentCRUD7 {
 		response = clientUtil.getDocument("demo",//索引表
 
 				"2");//文档id
+		Map data = clientUtil.getDocument("demo",//索引表
+				
+				"2",Map.class);//文档id
 		System.out.println("打印修改后的结果：getDocument-------------------------");
 		System.out.println(response);
 
