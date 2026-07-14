@@ -18,13 +18,11 @@ package org.bboss.elasticsearchtest.springboot;
 
 import org.bboss.elasticsearchtest.springboot.crud.MultiESDocumentCRUD;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 多集群演示功能测试用例，spring boot配置项以spring.elasticsearch.bboss.集群名称开头，例如：
@@ -34,7 +32,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  * 对应的配置文件为application-multi-datasource.properties文件
  * @author yinbp [122054810@qq.com]
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("multi-datasource")
 public class MultiBBossESStartersTestCase {

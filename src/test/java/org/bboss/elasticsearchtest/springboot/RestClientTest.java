@@ -21,13 +21,11 @@ import org.frameworkset.elasticsearch.ElasticSearchException;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
 import org.frameworkset.elasticsearch.client.ClientInterface;
 import org.frameworkset.elasticsearch.entity.ESDatas;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -45,7 +43,6 @@ import java.util.Map;
  * @author biaoping.yin
  * @version 1.0
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class RestClientTest {
 	private Logger logger = LoggerFactory.getLogger(RestClientTest.class);

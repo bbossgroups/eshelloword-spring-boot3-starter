@@ -17,13 +17,11 @@ package org.bboss.elasticsearchtest.springboot;
 
 import org.bboss.elasticsearchtest.springboot.bulk.TestBulkProcessor;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * <p>Description: </p>
@@ -33,7 +31,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author biaoping.yin
  * @version 1.0
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class BulkProcessorTest {
 	private Logger logger = LoggerFactory.getLogger(BulkProcessorTest.class);
