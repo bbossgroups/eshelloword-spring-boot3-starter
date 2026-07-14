@@ -21,12 +21,14 @@ import org.frameworkset.elasticsearch.ElasticSearchHelper;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
 import org.frameworkset.elasticsearch.client.ClientInterface;
 import org.frameworkset.elasticsearch.template.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -42,12 +44,13 @@ import java.util.Map;
  * @author biaoping.yin
  * @version 1.0
  */
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestThirdDslContainer {
 	@Autowired
 	private BBossESStarter bbossESStarter;
 	private static Logger logger = LoggerFactory.getLogger(TestThirdDslContainer.class);
-	@BeforeEach
+	@Before
 	public void init() throws SQLException {
 		/**
 		 * "org.sqlite.JDBC",

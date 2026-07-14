@@ -17,11 +17,13 @@ package org.bboss.elasticsearchtest.springboot;
 
 import org.bboss.elasticsearchtest.springboot.bulk.TestBulkProcessor7x;
 import org.bboss.elasticsearchtest.springboot.embedding.EmbeddingService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static java.lang.Thread.sleep;
 
@@ -33,6 +35,7 @@ import static java.lang.Thread.sleep;
  * @author biaoping.yin
  * @version 1.0
  */
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class EmbeddingServiceTest {
 	private Logger logger = LoggerFactory.getLogger(EmbeddingServiceTest.class);

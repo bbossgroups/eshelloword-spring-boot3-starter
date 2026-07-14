@@ -21,11 +21,13 @@ import org.frameworkset.elasticsearch.client.ClientInterface;
 import org.frameworkset.elasticsearch.entity.ESDatas;
 import org.frameworkset.elasticsearch.entity.MetaMap;
 import org.frameworkset.elasticsearch.entity.PitId;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +39,7 @@ import java.util.Map;
  * 对应的配置文件为application.properties文件
  * @author  yinbp [122054810@qq.com]
  */
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SimpleBBossESStarterTestCase {
 	private static Logger logger = LoggerFactory.getLogger(SimpleBBossESStarterTestCase.class);
