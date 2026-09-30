@@ -15,7 +15,6 @@ package org.bboss.elasticsearchtest.springboot.embedding;
  * limitations under the License.
  */
 
-import com.example.esbboss.entity.Demo;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
 import org.frameworkset.elasticsearch.client.ClientInterface;
 import org.frameworkset.elasticsearch.client.ClientOptions;
@@ -39,9 +38,9 @@ import java.util.*;
  */
 @Service
 @DependsOn("agentBootrap")
-public class EmbeddingService {
+public class EasysearchEmbeddingService {
 	
-	private static Logger logger = LoggerFactory.getLogger(EmbeddingService.class);
+	private static Logger logger = LoggerFactory.getLogger(EasysearchEmbeddingService.class);
 	@Autowired
 	private BBossESStarter bbossESStarter;
 	

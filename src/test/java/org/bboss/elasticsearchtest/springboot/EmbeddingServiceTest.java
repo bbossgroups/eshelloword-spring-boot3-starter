@@ -15,8 +15,7 @@ package org.bboss.elasticsearchtest.springboot;
  * limitations under the License.
  */
 
-import org.bboss.elasticsearchtest.springboot.bulk.TestBulkProcessor7x;
-import org.bboss.elasticsearchtest.springboot.embedding.EmbeddingService;
+import org.bboss.elasticsearchtest.springboot.embedding.EasysearchEmbeddingService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -41,15 +40,15 @@ public class EmbeddingServiceTest {
 	private Logger logger = LoggerFactory.getLogger(EmbeddingServiceTest.class);
  
 	@Autowired
-	private EmbeddingService embeddingService;
+	private EasysearchEmbeddingService easysearchEmbeddingService;
 	@Test
 	public void testEmbeddingService(){
 		
-		embeddingService.createEmbeddingIndice();
+		easysearchEmbeddingService.createEmbeddingIndice();
 		
-		embeddingService.addEmbeddingDocuments();
+		easysearchEmbeddingService.addEmbeddingDocuments();
 		
-		embeddingService.embeddingDocumentsSearch();
+		easysearchEmbeddingService.embeddingDocumentsSearch();
 		 
 	}
 }
