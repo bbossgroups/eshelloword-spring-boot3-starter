@@ -5,7 +5,7 @@ spring:
       elasticUser: elastic
       elasticsearch: 
         rest:
-          hostNames: 10.13.6.7:9200
+          hostNames: 101.13.6.7:9200
         connectionRequestTimeout: 500
         timeoutConnection: 50000
         timeoutSocket: 50000         

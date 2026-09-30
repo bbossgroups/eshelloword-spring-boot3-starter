@@ -36,10 +36,10 @@ public class ElasticsearchTextEmbedding {
         //Elasticsearch KNN search参考文档：https://www.elastic.co/docs/solutions/search/vector/knn#knn-search-filter-example
         elasticsearchEmbeddingService.testCreateTextEmbeddingIndex();
         elasticsearchEmbeddingService.bulkdata();
-        elasticsearchEmbeddingService.search();
-        elasticsearchEmbeddingService.search1();
-        elasticsearchEmbeddingService.searchWithFilter();
-        elasticsearchEmbeddingService.searchWithScore();
+//        elasticsearchEmbeddingService.search();
+//        elasticsearchEmbeddingService.search1();
+//        elasticsearchEmbeddingService.searchWithFilter();
+//        elasticsearchEmbeddingService.searchWithScore();
         elasticsearchEmbeddingService.searchVectorAndRerank();
     }
 

@@ -16,23 +16,17 @@ package org.bboss.elasticsearchtest.springboot.embedding;
  */
 
 import com.frameworkset.util.SimpleStringUtil;
-import org.frameworkset.elasticsearch.ElasticSearchHelper;
+import jakarta.annotation.PostConstruct;
 import org.frameworkset.elasticsearch.boot.BBossESStarter;
 import org.frameworkset.elasticsearch.client.ClientInterface;
-import org.frameworkset.elasticsearch.client.ClientOptions;
 import org.frameworkset.elasticsearch.entity.ESDatas;
 import org.frameworkset.elasticsearch.entity.MetaMap;
 import org.frameworkset.spi.ai.AIAgent;
-import org.frameworkset.spi.ai.model.AIRuntimeException;
-import org.frameworkset.spi.ai.model.EmbeddingMessage;
+import org.frameworkset.spi.ai.model.*;
 import org.frameworkset.spi.remote.http.HttpRequestProxy;
-import org.frameworkset.tran.DataImportException;
-import org.frameworkset.tran.textembedding.XinferenceResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -59,7 +53,8 @@ public class ElasticsearchEmbeddingService {
 		catch (Exception e){
 			
 		}
-		clientUtil.createIndiceMapping("collection-with-embeddings","createTextEmbeddingIndex");
+		if(!clientUtil.existIndice("collection-with-embeddings"))			
+			clientUtil.createIndiceMapping("collection-with-embeddings","createTextEmbeddingIndex");
 	}
 	
 	
@@ -70,13 +65,15 @@ public class ElasticsearchEmbeddingService {
 		//embedding_model为的向量模型服务数据源名称
 		properties.put("http.poolNames","embedding_model");
 		
-		properties.put("embedding_model.http.hosts","10.13.6.7:9997");///设置向量模型服务地址(这里调用的xinference发布的模型服务),多个地址逗号分隔，可以实现点到点负载和容灾
+		properties.put("embedding_model.http.hosts","101.13.6.7:9997");///设置向量模型服务地址(这里调用的xinference发布的模型服务),多个地址逗号分隔，可以实现点到点负载和容灾
 		
 		properties.put("embedding_model.http.timeoutSocket","60000");
 		properties.put("embedding_model.http.timeoutConnection","40000");
 		properties.put("embedding_model.http.connectionRequestTimeout","70000");
 		properties.put("embedding_model.http.maxTotal","100");
 		properties.put("embedding_model.http.defaultMaxPerRoute","100");
+		properties.put("embedding_model.http.defaultMaxPerRoute","100");
+		properties.put("embedding_model.http.modelType","xinference");	
 		HttpRequestProxy.startHttpPools(properties);
 	}
 	
@@ -154,7 +151,7 @@ public class ElasticsearchEmbeddingService {
 	}
 	
 	public void search(){
-		ClientInterface clientUtil = ElasticSearchHelper.getConfigRestClientUtil("esmapper/elasticsearch-embedding.xml");
+		ClientInterface clientUtil = bbossESStarter.getConfigRestClient("esmapper/elasticsearch-embedding.xml");
 		Map params = new LinkedHashMap();
 		//设置向量查询条件，调用数据向量化方法，将检索文本bboss转化为向量数据，默认最多返回10条数据
 		params.put("condition",text2embedding("bboss"));
@@ -174,7 +171,7 @@ public class ElasticsearchEmbeddingService {
 	}
 	
 	public void search1(){
-		ClientInterface clientUtil = ElasticSearchHelper.getConfigRestClientUtil("esmapper/elasticsearch-embedding.xml");
+		ClientInterface clientUtil = bbossESStarter.getConfigRestClient("esmapper/elasticsearch-embedding.xml");
 		Map params = new LinkedHashMap();
 		//设置向量查询条件，调用数据向量化方法，将检索文本bboss转化为向量数据
 		params.put("condition",text2embedding("bboss"));
@@ -196,7 +193,7 @@ public class ElasticsearchEmbeddingService {
 	}
 	
 	public void searchWithFilter(){
-		ClientInterface clientUtil = ElasticSearchHelper.getConfigRestClientUtil("esmapper/elasticsearch-embedding.xml");
+		ClientInterface clientUtil = bbossESStarter.getConfigRestClient("esmapper/elasticsearch-embedding.xml");
 		Map params = new LinkedHashMap();
 		//设置向量查询条件，调用数据向量化方法，将检索文本bboss转化为向量数据
 		params.put("condition",text2embedding("bboss"));
@@ -221,7 +218,7 @@ public class ElasticsearchEmbeddingService {
 	}
 	
 	public void searchWithScore(){
-		ClientInterface clientUtil = ElasticSearchHelper.getConfigRestClientUtil("esmapper/elasticsearch-embedding.xml");
+		ClientInterface clientUtil = bbossESStarter.getConfigRestClient("esmapper/elasticsearch-embedding.xml");
 		Map params = new LinkedHashMap();
 		//设置向量查询条件，调用数据向量化方法，将检索文本bboss转化为向量数据
 		params.put("condition",text2embedding("bboss"));
@@ -246,7 +243,7 @@ public class ElasticsearchEmbeddingService {
 	
 	
 	public void searchVectorAndRerank(){
-		ClientInterface clientUtil = ElasticSearchHelper.getConfigRestClientUtil("esmapper/elasticsearch-embedding.xml");
+		ClientInterface clientUtil = bbossESStarter.getConfigRestClient("esmapper/elasticsearch-embedding.xml");
 		Map params = new LinkedHashMap();
 		//设置向量查询条件，调用数据向量化方法，将检索文本bboss转化为向量数据
 		params.put("condition",text2embedding("bboss介绍"));
@@ -260,25 +257,39 @@ public class ElasticsearchEmbeddingService {
 		logger.info("datas.getTotalSize():"+datas.getTotalSize());
 //        logger.info("datas.getDatas():"+ SimpleStringUtil.object2json(datas.getDatas()));
 		List<MetaMap> metaMaps = datas.getDatas();
-		List rerankDatas = new ArrayList();
+		List<RerankDocument> rerankDatas = new ArrayList<>();
 		for(int i = 0; i < metaMaps.size(); i ++){
 			MetaMap metaMap = metaMaps.get(i);
 			logger.info("score: {}",metaMap.getScore());//相似度分数
 			logger.info("text: {}",metaMap.get("text"));//检索的原始文本
-			rerankDatas.add(metaMap.get("text"));
+		
 			logger.info("key: {}",metaMap.get("key"));//检索的key字段值
 			
+			RerankDocument rerankDocument = new RerankDocument();
+			rerankDocument.setDocument((String) metaMap.get("text"));			
+			rerankDocument.setBm25Score(metaMap.getScore());
+			rerankDocument.setMetadata(metaMap);
+			rerankDatas.add(rerankDocument);
 		}
 		
 		//对检索结果进行Rerank处理
-		Map rerankParams = new LinkedHashMap();
-		rerankParams.put("model","bge-reranker-large");//指定基于Xinference部署的Rerank模型
-		rerankParams.put("documents",rerankDatas);//根据问题进行向量检索返回的数据
-		rerankParams.put("query","bboss介绍");//问题
+ 
+		RerankMessage rerankMessage = new RerankMessage();
+		rerankMessage.setMaas("embedding_model");                       // MaaS 服务名
+		rerankMessage.setModel("bge-reranker-large");  // Rerank 模型
+		rerankMessage.setRerankDocuments(rerankDatas);          // 候选文档列表
+		rerankMessage.setQuery("bboss介绍");                         // 用户查询
+		rerankMessage.setReturnDocuments(false);               // 是否返回原始文本
+		rerankMessage.setTopK(10);   
+		rerankMessage.setRetry(3);
+		rerankMessage.setRetryInterval(500L);	
+		// 最多返回前 10 个最相关文档
+		rerankMessage.setRelevanceScore(0.5d);                 // 只召回相似度大于该值的文档
 		
-		//调用Xinference Rerank服务，对问题的各个答案进行语义相关度排序
-		Map reponse = HttpRequestProxy.sendJsonBody("embedding_model",rerankParams,"/v1/rerank",Map.class);
-		logger.info(SimpleStringUtil.object2json(reponse));
+		AIAgent aiAgent = new AIAgent();
+		List<RerankedDocument> rerankedDocuments = aiAgent.rerank(rerankMessage);
+		 
+		logger.info(SimpleStringUtil.object2json(rerankedDocuments));
 	}
 }
 
